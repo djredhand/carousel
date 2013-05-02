@@ -10,12 +10,13 @@ jQuery(document).ready(function($){
 	    }
 	}
 	//slideTerms are set as term, then X and Y coordinate value
-	window.slideTerms =[ ['Resilience',10,10],['Customer impact', 44,57],
-						 ['Social media',22,133],['Talent',154,138], 
-						 ['Innovation',205,105],['Technology',193,37],
-						 ['Big Data', 299, 67],['Supply Chain',448,18],
-						 ['Operations',409,59],['Internal audit',520,220]
+	window.slideTerms =[ ['Resilience',10,10],['Customer impact', 44,87],
+						 ['Social media',32,190],['Talent',184,238], 
+						 ['Innovation',455,161],['Technology',193,37],
+						 ['Big Data', 366, 207],['Supply Chain',488,18],
+						 ['Operations',589,99],['Internal audit',560,220]
 				];
+	window.slideTitle = ["This is the world<br/> we live in.",240,80]
 	
 	var showText = function (){
 		if(window.slideTerms.length){
@@ -29,8 +30,8 @@ jQuery(document).ready(function($){
 			spanTerm.appendTo(_slide);
 			spanTerm.animate({
 				opacity: 1,
-				fontSize:210+"%"
-			},750)
+				fontSize:25+"px"
+			},550)
 			console.log(slideTerms[rndNum][0]);
 			window.slideTerms.removeByValue(rndNum)
 			
@@ -42,9 +43,35 @@ jQuery(document).ready(function($){
 
 		if(window.slideTerms.length === 0){
 			window.clearInterval(window.showTimer);
+			showPageTitle();
 		}
 	}//end showText()
-$('body').animate({opacity:1},200,function(){
+
+	function showPageTitle(){
+		var pageTitle = $('<div class="page-title"/>');
+		var _slide = $('.flytext');
+		pageTitle.css({
+			width:300+'px',
+			fontWeight:'bold',
+			opacity: 0,
+			color:'#fff',
+			position:'absolute',
+			marginLeft: slideTitle[1],
+			marginTop: slideTitle[2]
+			})
+		pageTitle.html(slideTitle[0]);
+		pageTitle.appendTo(_slide);
+		$('.slide-term').animate({
+				color:'#7f7f77'
+			},2000);
+		pageTitle.animate({
+					opacity:1,
+					fontSize:42+'px'
+				},1500);	
+	}
+
+	//Global timer to start animation showText()
+	$('body').animate({opacity:1},200,function(){
 			window.showTimer = setInterval(showText, 500);
 		});//end animate
 
