@@ -14,7 +14,7 @@ jQuery(document).ready(function($){
 						 ['Social media',22,133],['Talent',154,138], 
 						 ['Innovation',205,105],['Technology',193,37],
 						 ['Big Data', 299, 67],['Supply Chain',448,18],
-						 ['Operations',409,59],['Internal audit',520,320]
+						 ['Operations',409,59],['Internal audit',520,220]
 				];
 	
 	var showText = function (){
@@ -22,15 +22,15 @@ jQuery(document).ready(function($){
 			var rndNum = Math.floor(Math.random()*window.slideTerms.length);
 			var spanTerm = $('<div class="slide-term"/>');
 			var _slide = $('.flytext');
-			spanTerm.css({opacity:0});
+			spanTerm.css({opacity:0, position: 'absolute'});
 			spanTerm.css({marginLeft: slideTerms[rndNum][1] });
 			spanTerm.css({marginTop: slideTerms[rndNum][2] });
 			spanTerm.html(window.slideTerms[rndNum][0]);
 			spanTerm.appendTo(_slide);
 			spanTerm.animate({
 				opacity: 1,
-				fontSize:180+"%"
-			},1350)
+				fontSize:210+"%"
+			},750)
 			console.log(slideTerms[rndNum][0]);
 			window.slideTerms.removeByValue(rndNum)
 			
@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
 			window.clearInterval(window.showTimer);
 		}
 	}//end showText()
-$('body').animate({opacity:1},500,function(){
+$('body').animate({opacity:1},200,function(){
 			window.showTimer = setInterval(showText, 500);
 		});//end animate
 
