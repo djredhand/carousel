@@ -1,14 +1,13 @@
-// script called on line 186 just after <head></head>
-
-jQuery(document).ready(function($){
+jQuery(document).ready(function($) {
 	Array.prototype.removeByValue = function(val) {
-	    for(var i=0; i<this.length; i++) {
-	        if(i == val) {
-	            this.splice(i, 1);
-	            break;
-	        }
-	    }
+		for(var i=0; i<this.length; i++) {
+			if(i == val) {
+				this.splice(i, 1);
+				break;
+			}
+		}
 	}
+
 	//slideTerms are set as term, then X and Y coordinate value
 	window.slideTerms =[ ['Resilience',10,10],['Customer impact', 44,87],
 						 ['Social media',32,190],['Talent',184,238], 
@@ -18,7 +17,7 @@ jQuery(document).ready(function($){
 				];
 	window.slideTitle = ["This is the world<br/> we live in.",240,80]
 	
-	var showText = function (){
+	var showText = function() {
 		if(window.slideTerms.length){
 			var rndNum = Math.floor(Math.random()*window.slideTerms.length);
 			var spanTerm = $('<div class="slide-term"/>');
@@ -32,13 +31,7 @@ jQuery(document).ready(function($){
 				opacity: 1,
 				fontSize:25+"px"
 			},550)
-			console.log(slideTerms[rndNum][0]);
-			window.slideTerms.removeByValue(rndNum)
-			
-
-				
-				
-
+			window.slideTerms.removeByValue(rndNum);
 		}
 
 		if(window.slideTerms.length === 0){
@@ -47,15 +40,10 @@ jQuery(document).ready(function($){
 		}
 	}//end showText()
 
-	function showPageTitle(){
+	function showPageTitle() {
 		var pageTitle = $('<div class="page-title"/>');
 		var _slide = $('.flytext');
 		pageTitle.css({
-			width:300+'px',
-			fontWeight:'bold',
-			opacity: 0,
-			color:'#fff',
-			position:'absolute',
 			marginLeft: slideTitle[1],
 			marginTop: slideTitle[2]
 			})
@@ -71,8 +59,40 @@ jQuery(document).ready(function($){
 	}
 
 	//Global timer to start animation showText()
-	$('body').animate({opacity:1},200,function(){
+	$('body').animate({opacity:1},200,function() {
 			window.showTimer = setInterval(showText, 500);
 		});//end animate
 
+	/*
+	/ This is the code to link the left nave to the slider
+	*/
+	window.linkNavToSlider = function() {
+		var navLinks = jQuery('#browseLinks li a');
+		var sliderLink = jQuery('.media-feature-tabs a');
+
+
+		navLinks.click(function(e) {
+			navLinks.removeClass('selected');
+			var index = getIndex($('#browseLinks li a'), $(this));
+			$(sliderLink[index+1]).trigger('click');
+		})
+
+		sliderLink.click(function(e) {
+			var index = getIndex($('.media-feature-tabs a'),$(this));
+			var browseLinks = $('#browseLinks li a')
+			browseLinks.removeClass('selected');
+			$($(browseLinks)[index-1]).addClass('selected');
+
+		})
+
+		function getIndex(list, currentTarget){
+			for(var i=0; i<list.length; i++){
+				if($(list[i]).text() === currentTarget.text() ){
+					return i;
+				}
+			}
+		}
+	}
+	//Call linkNavToSlider*()
+	window.linkNavToSlider();
 })

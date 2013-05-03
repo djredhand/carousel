@@ -3,3 +3,40 @@
 	font-family: Georgia, "Times New Roman";
 	font-size:8px;
 }
+
+.page-title{
+	font-family: Georgia, "Times New Roman";
+	width:320px;
+	font-weight:bold;
+	opacity:0;
+	color:#fff;
+	position:absolute;
+	line-height: 42px;
+}
+ul#browseLinks{
+	padding: 0 !important;
+	margin:0 !important;
+}
+
+#browseLinks li.li-header{
+	font-size: 20px;
+	color: #A32020 !important;
+}
+
+#browseLinks li{
+  border-bottom: 1px dotted #CCCCCC;
+    color: #404041;
+    line-height: 25px;
+    list-style-image: none !important;
+    list-style: none !important;
+}
+
+#browseLinks li a{
+	color: #333 !important;
+}
+#browseLinks li a.selected{
+	color: #A32020 !important;
+}
+#browseLinks li a:hover{
+	color: #A32020 !important;
+}
